@@ -44,7 +44,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="41dp"
             android:gravity="center"
-            android:text="Ciudad" />
+            android:text="Teléfono" />
 
         <EditText
             android:id="@+id/usrCityEdit"
@@ -54,7 +54,7 @@
             android:editable="false"
             android:ems="10"
             android:gravity="center"
-            android:hint="ciudad"
+            android:hint="teléfono"
             android:inputType="text" />
 
         <TextView

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,18 +66,20 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void getUser() {
-        DAOUser.getInstance().select(mUser.getUid());
-        UpdateUi();
+        SelectUser(mUser.getUid());
     }
 
 
     private void UpdateUi(){
-        welcomeMessage.setText("Bienvenido " + user.getName() + " " + user.getSurname());
+       welcomeMessage.setText("Bienvenido " + user.getName() + " " + user.getSurname());
+       usrCity.setText(user.getPhone());
+       usrEmail.setText(user.getMail());
 
     }
     private void saveChanges() {
-        User usr = new User(usrCity.getText().toString(),usrEmail.getText().toString(),"","","");
-        DAOUser.update(usr);
+        user.setPhone(usrCity.getText().toString());
+        user.setMail(usrEmail.getText().toString());
+        DAOUser.update(user);
     }
 
     private void setEditable(boolean b) {
@@ -98,4 +101,34 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    public void SelectUser(final String uid){
+        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent
+                (new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot snap:dataSnapshot.getChildren()){
+                            if(uid.equals(snap.getKey().toString())){
+                                String name = snap.child("name").getValue().toString();
+                                String surname = snap.child("surname").getValue().toString();
+                                String phone = snap.child("phone").getValue().toString();
+                                String description = snap.child("description").getValue().toString();
+                                String email = snap.child("mail").getValue().toString();
+
+                                user = new User();
+                                user.setName(name);
+                                user.setSurname(surname);
+                                user.setPhone(phone);
+                                user.setDescription(description);
+                                user.setMail(email);
+
+                                UpdateUi();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.crud_firebase.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 
@@ -77,7 +79,7 @@ public class DAOUser {
      * @return The User selected
      */
     public static User select(final String uid) {
-
+        final User[] user = new User[1];
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent
                 (new ValueEventListener() {
                     @Override
@@ -89,7 +91,8 @@ public class DAOUser {
                                 String phone = snap.child("phone").getValue().toString();
                                 String description = snap.child("description").getValue().toString();
 
-                                user = new User(name,surname,phone,description);
+                                user[0] = new User(name,surname,phone,description);
+                                Log.d("usrobj", user.toString());
                             }
                         }
                     }
@@ -98,8 +101,7 @@ public class DAOUser {
 
                     }
                 });
-
-        return user;
+        return user[0];
     }
 
     /**
