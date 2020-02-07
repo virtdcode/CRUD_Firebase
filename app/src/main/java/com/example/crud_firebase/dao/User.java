@@ -15,13 +15,24 @@ public class User {
     private String password;
     // The description about the User
     private String description;
-
+    // The latitude stored about the User
+    private Double latitude;
+    // The longitude stored about the User
+    private Double longitude;
     /**
      * Constructor of the User
      */
     public User() {
     }
 
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param phone
+     * @param mail
+     * @param description
+     */
     public User(String name, String surname, String phone, String mail, String description) {
         this.name = name;
         this.surname = surname;
@@ -145,7 +156,6 @@ public class User {
     public String getMail() {
         return mail;
     }
-
     /**
      * Sets the mail of the User
      *
@@ -154,7 +164,6 @@ public class User {
     public void setMail(String mail) {
         this.mail = mail;
     }
-
     /**
      * Returns the password of the User
      *
@@ -163,7 +172,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     /**
      * Sets the password of the User
      *
@@ -172,7 +180,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
     /**
      * Returns the description of the User
      *
@@ -189,5 +196,33 @@ public class User {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+    /**
+     * Reuturns the latitude of the User
+     * @return
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
+    /**
+     * Sets the latitude of the User
+     * @param latitude
+     */
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+    /**
+     * Reuturns the longitude of the User
+     * @return
+     */
+    public Double getLongitude() {
+        return longitude;
+    }
+    /**
+     * Sets the longitude of the User
+     * @param longitude
+     */
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

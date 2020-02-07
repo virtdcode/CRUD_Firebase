@@ -35,6 +35,7 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
     private Map<String,String> userMap;
     private Button editButton;
     private Button saveButton;
+    private Button listButton;
     private ProgressDialog progressDialog;
 
     private User user;
@@ -54,6 +55,8 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
         saveButton = findViewById(R.id.saveProf);
         editButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
+        listButton = findViewById(R.id.listview);
+        listButton.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
         // MODELO
         userMap = new HashMap<>();
@@ -98,9 +101,16 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
                 saveChanges();
                 setEditable(false);
                 break;
+            case R.id.listview:
+                startActivity(new Intent(this, User_list.class));
+                break;
         }
     }
 
+    /**
+     * Selects a user from the realtime database
+     * @param uid
+     */
     public void SelectUser(final String uid){
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent
                 (new ValueEventListener() {

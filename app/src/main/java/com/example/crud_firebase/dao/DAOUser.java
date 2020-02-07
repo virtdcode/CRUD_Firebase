@@ -1,10 +1,18 @@
 package com.example.crud_firebase.dao;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 
+import com.example.crud_firebase.R;
+import com.firebase.client.Firebase;
+import com.firebase.ui.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,8 +31,6 @@ public class DAOUser {
     private static FirebaseAuth mAuth;
     private static DatabaseReference mDatabase;
     private static FirebaseUser mUser;
-    private static User user;
-    private static boolean check;
     /**
      * Constructor of the DAOUser
      */
@@ -68,8 +74,8 @@ public class DAOUser {
      *
      * @return The UserList of Users from the database
      */
-    public static UserList select() {
-        return null;
+    public static void fillList(ListView list, Activity activity) {
+
     }
 
     /**
